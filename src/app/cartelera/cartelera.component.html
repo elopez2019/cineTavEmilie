@@ -1,0 +1,98 @@
+<br>
+<div class="container">
+  <h3>
+    Agregar Cartelera
+  </h3>
+  
+  <div class="alert alert-primary" role="alert" >
+    {{message}}
+  </div>
+</div>
+
+<br>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+        
+      <form [formGroup]="formGroup"  class="needs-validation" novalidate method="post" style="flex: 1; margin-right: 10px;">
+        <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Titulo</label>
+            <input type="text" class="form-control" formControlName="title" (ngModelChange)="onNameChanged($event)" id="validationCustom01" placeholder="titulo"  required>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom02">Director</label>
+            <input type="text" class="form-control" formControlName="director" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="director"  required>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom03">Fecha lanzamiento</label>
+            <input type="date" class="form-control" formControlName="release_date"
+            (ngModelChange)="onNameChanged($event)" id="validationCustom03" placeholder="Fecha lanzamiento" required>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom04">Género</label>
+            <input type="text" class="form-control" formControlName="genre" (ngModelChange)="onNameChanged($event)" id="validationCustom04" placeholder="Género" required>
+        </div>
+        
+        </div>
+        
+        <button class="btn btn-primary" (click)="postForm(formGroup.value)">Agregar</button>
+
+        
+    </form>
+
+    <table class="table" style="flex: 1;">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Director</th>
+          <th scope="col">Fecha Creación</th>
+          <th scope="col">Género</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of movies">
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.director }}</td>
+          <td>{{ movie.release_date | date: 'dd-MM-yyyy'}}</td>
+          <td>{{ movie.genre }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"  (click)="editMovie(movie)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="butto" class="btn btn-danger btn-sm"  (click)="deleteMovie(movie)">
+              <i  class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+
+</div>
+<br>
+<br>

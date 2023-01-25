@@ -1,0 +1,85 @@
+<br>
+<div class="container">
+  <h3>
+    Agregar Sala
+  </h3>
+  
+  <div class="alert alert-primary" role="alert" >
+    {{message}}
+  </div>
+</div>
+
+<br>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+        
+      <form [formGroup]="formGroup"  class="needs-validation" novalidate method="post" style="flex: 1; margin-right: 10px;">
+        <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Nombre</label>
+            <input type="text" class="form-control" formControlName="name" (ngModelChange)="onNameChanged($event)" id="validationCustom01" placeholder="Nombre"  required>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom02">Capacidad</label>
+            <input type="text" class="form-control" formControlName="capacity" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Capacidad" required>
+        </div>
+        </div>
+        <div class="form-row">
+        
+        </div>
+        
+        <button class="btn btn-primary" (click)="postForm(formGroup.value)">Agregar</button>
+
+        
+    </form>
+
+    <table class="table" style="flex: 1;">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Capacidad</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of rooms">
+          <td>{{ room.name }}</td>
+          <td>{{ room.capacity }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"  (click)="editRoom(room)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="butto" class="btn btn-danger btn-sm"  (click)="deleteRoom(room)">
+              <i  class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+
+</div>
+<br>
+<br>
